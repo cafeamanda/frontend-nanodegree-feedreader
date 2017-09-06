@@ -68,7 +68,7 @@ $(function() {
         /* This test ensures the menu element is hidden by default.
          */
         it ('Ensures that the menu element is hidden by default', function() {
-            expect(body.attr('class')).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBeTruthy();
         });
 
         /* This test ensures the menu changes visibility when
@@ -82,13 +82,13 @@ $(function() {
              * body.hasClass('menu-hidden') returns false.
              */
             menuIcon.trigger('click');
-            expect(body.attr('class')).not.toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBeFalsy();
             /* Following the same logic, when menuIcon is clicked
              * the second time, body.hasClass('menu-hidden')
              * returns true.
              */
             menuIcon.trigger('click');
-            expect(body.attr('class')).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBeTruthy();
         });
 
     });
@@ -108,14 +108,13 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, function() {
-                allFeedElements = $('.feed').find('.entry');
                 done();
             });
         });
 
-        it ('Ensures there\'s at least one .entry element within the .feed container when loadFeed() completes its work', function(done) {
+        it ('Ensures there\'s at least one .entry element within the .feed container when loadFeed() completes its work', function() {
+            allFeedElements = $('.feed').find('.entry');
             expect(allFeedElements.length).toBeGreaterThan(0);
-            done();
         });
     });
 
